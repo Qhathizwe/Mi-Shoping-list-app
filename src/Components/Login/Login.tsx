@@ -1,5 +1,5 @@
 import styles from './Login.module.css'
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 
 const Login = () => {
   return (
@@ -11,7 +11,7 @@ const Login = () => {
             <input type="text" placeholder='Enter Your email' />
         </div>
          <div className={styles.password}>
-            <input type="text" placeholder='Enter Your Password' />
+            <input type="password" placeholder='Enter Your Password' />
         </div>
         <button className={styles.btnLogin}>Login</button>
         <div className={styles.register}>
