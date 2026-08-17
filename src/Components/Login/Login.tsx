@@ -1,5 +1,5 @@
 import styles from './Login.module.css'
-// import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Login = () => {
   return (
@@ -16,9 +16,9 @@ const Login = () => {
         <button className={styles.btnLogin}>Login</button>
         <div className={styles.register}>
             <p>Don't have an account? 
-                {/* <NavLink to ="/" className={styles.register}>
+                <NavLink to ="register" className={styles.register}>
                  Register
-                </NavLink> */}
+                </NavLink>
             </p>
         </div>
         </div>
