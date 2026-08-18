@@ -1,6 +1,6 @@
 
 import styles from './Register.module.css'
-import { Button } from '../Button/Button'
+// import { Button } from '../Button/Button'
 import { NavLink } from 'react-router-dom'
 
 
@@ -8,17 +8,17 @@ const Register = () => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-
+          <h1 className={styles.title}>Please <span className={styles.titleGreen}>Register</span> Your Acoount</h1>
         <div className={styles.nameSurname}>
             <input type="text" className={styles.name} placeholder='Name'/>
             <input type="text" className={styles.surname} placeholder='Surname'/>
         </div>
 
-            <div>
-                <input type="email" className={styles.email} placeholder='Email'/>
-                <input type="text" className={styles.Phone} placeholder='Phone Number'/>
-                <input type="password" className={styles.password} placeholder='Password'/>
-            </div>
+         
+        <div className={styles.email}><input type="email" className={styles.email} placeholder='Email'/></div>
+        <div className={styles.text}><input type="text" className={styles.Phone} placeholder='Phone Number'/></div>
+        <div className={styles.password}><input type="password" className={styles.password} placeholder='Password'/></div>
+        
             <button className={styles.btnRegister}>Register</button>
 
 

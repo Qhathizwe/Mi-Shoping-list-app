@@ -16,7 +16,7 @@ const Login = () => {
         <button className={styles.btnLogin}>Login</button>
         <div className={styles.register}>
             <p>Don't have an account? 
-                <NavLink to ="register" className={styles.register}>
+                <NavLink to ="register" className={styles.Linkregister}>
                  Register
                 </NavLink>
             </p>

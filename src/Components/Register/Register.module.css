@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: column;
     
-    gap: 20px;
+    gap: 15px;
     justify-content: center;
     justify-self: center;
     align-items: center;
@@ -23,16 +23,50 @@
     background-color: black;
     color: aliceblue;
 }
+.titleGreen{
+    color: #008000;
+}
 .nameSurname{
     display: flex;
-    gap: 20px;
+    gap: 15px;
     
 }
 .name{
-    width: 100vw;
+    width: 50vw;
 }
 .nameSurname input{
    display: flex;
    flex-direction: column;
-   width: 100%;
+   width:100%;
+}
+.email, .text, .password, input{
+   width: 89%;
+   height: 28px;
+}
+.container input{
+    border: 2px solid #008000;
+    box-shadow: 1px 1px 1px 1px  #008000;
+    font-weight: 800;
+    background-color: darkgray;
+    color: aliceblue;
+}
+.btnRegister{
+    width: 200px;
+    height: 35px;
+    color: aliceblue;
+    background-color: #008000;
+    border: 2px solid #008000;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out 0s;
+}
+.btnRegister:hover{
+    transform: scale(1.1);
+    box-shadow: #008000;
+    cursor: pointer;
+}
+.linkLogin{
+    color: #008000;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease-in-out 0s;
 }

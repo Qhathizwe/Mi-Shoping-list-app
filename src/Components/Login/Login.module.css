@@ -31,7 +31,7 @@ h1{
     color: aliceblue;
 }
 
-input{
+.LoginContent input{
     border: 2px solid #008000;
     width: 35vw;
     height: 30px;
@@ -54,4 +54,16 @@ input::placeholder{
     font-weight: 800;
     border-radius: 10px;
     border: 1px solid #008000;
+    transition: all 0.3s ease-in-out 0s;
+}
+.btnLogin:hover{
+    transform: scale(1.1);
+    box-shadow: #008000;
+    cursor: pointer;
+}
+.Linkregister{
+    color: #008000;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease-in-out 0s;
 }
