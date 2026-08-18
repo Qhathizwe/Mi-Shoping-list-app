@@ -32,13 +32,17 @@ h1{
 }
 
 .LoginContent input{
-    border: 2px solid #008000;
+    border: 1px solid #008000;
     width: 35vw;
     height: 30px;
     box-shadow: 1px 1px 1px 1px  #008000;
     font-weight: 800;
     background-color: darkgray;
     color: aliceblue;
+    transition: box-shadow 0.3s ease;
+}
+.LoginContent input:hover{
+     box-shadow: 2px 8px 10px#06df06;
 }
 input::placeholder{
     color: white;
@@ -54,11 +58,11 @@ input::placeholder{
     font-weight: 800;
     border-radius: 10px;
     border: 1px solid #008000;
-    transition: all 0.3s ease-in-out 0s;
+    transition: box-shadow 0.3s ease; 
 }
-.btnLogin:hover{
+.btnLogin:hover, .LoginContent input:hover{
+    box-shadow: 5px 8px 10p#06df06;
     transform: scale(1.1);
-    box-shadow: #008000;
     cursor: pointer;
 }
 .Linkregister{
