@@ -1,73 +1,99 @@
-.LoginContainer{
-    width: 100%;
-    height: 100vh;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.LoginContainer {
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
 }
+
 .LoginContent {
-    width: 55vw;
-    height: 50vh;
-    border: 5px solid #008000;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    
-    gap: 20px;
-    justify-content: center;
-    justify-self: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 3px 3px 3px 3px  #008000;
-    background-color: black;
-    color: aliceblue;
-    
-
-
-
-}
-h1{
-    color: aliceblue;
+  width: 100%;
+  max-width: 500px; /* Matches the Register card width perfectly */
+  padding: 2.5rem;
+  border: 4px solid #008000;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0px 0px 15px #008000;
+  background-color: black;
+  color: aliceblue;
+  box-sizing: border-box;
 }
 
-.LoginContent input{
-    border: 1px solid #008000;
-    width: 35vw;
-    height: 30px;
-    box-shadow: 1px 1px 1px 1px  #008000;
-    font-weight: 800;
-    background-color: darkgray;
-    color: aliceblue;
-    transition: box-shadow 0.3s ease;
+.title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.75rem;
+  color: aliceblue;
 }
-.LoginContent input:hover{
-     box-shadow: 2px 8px 10px#06df06;
+
+.tGreen {
+  color: #008000;
 }
-input::placeholder{
-    color: white;
+
+/* Replaces old styling to make inputs fill the card naturally */
+.loginInput {
+  width: 100%;
+  height: 40px;
+  border: 2px solid #008000;
+  border-radius: 6px;
+  box-shadow: 1px 1px 3px #008000;
+  font-weight: 700;
+  background-color: darkgray;
+  color: black; /* Dark text for visual clarity against grey background */
+  padding: 0 10px;
+  box-sizing: border-box;
+  outline: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.tGreen{
-    color: #008000;
+
+.loginInput:hover {
+  box-shadow: 0px 0px 12px #06df06;
+  transform: scale(1.02); /* Subtle pop effect */
+  cursor: pointer;
 }
-.btnLogin{
-    width: 160px;
-    height: 35px;
-    color:aliceblue;
-    background-color: #008000;
-    font-weight: 800;
-    border-radius: 10px;
-    border: 1px solid #008000;
-    transition: box-shadow 0.3s ease; 
+
+input::placeholder {
+  color: #333; /* Darker placeholder to stay readable on darkgray input */
 }
-.btnLogin:hover, .LoginContent input:hover{
-    box-shadow: 5px 8px 10p#06df06;
-    transform: scale(1.1);
-    cursor: pointer;
+
+.btnLogin {
+  width: 100%;
+  max-width: 160px;
+  height: 40px;
+  color: aliceblue;
+  background-color: #008000;
+  font-weight: 800;
+  border-radius: 8px;
+  border: none;
+  margin-top: 0.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
-.Linkregister{
-    color: #008000;
-    text-decoration: none;
-    font-weight: 700;
-    transition: all 0.3s ease-in-out 0s;
+
+.btnLogin:hover {
+  box-shadow: 0px 0px 12px #06df06; /* Fixed typo '10p#06df06' */
+  transform: scale(1.05);
+}
+
+.registerText {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.Linkregister {
+  color: #008000;
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.Linkregister:hover {
+  color: #06df06;
+  text-decoration: underline;
 }
