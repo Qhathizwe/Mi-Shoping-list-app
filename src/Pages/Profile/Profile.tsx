@@ -1,8 +1,14 @@
 import styles from './Profile.module.css'
 import profile from '../../assets/profile.avif'
+import { useNavigate } from 'react-router-dom'
 
 
 const Profile = () => {
+    const navigate = useNavigate();
+    const logOut = () =>{
+        navigate ("/")
+    }
+
 
   return (
     <div className={styles.profileContainer}>
@@ -23,7 +29,7 @@ const Profile = () => {
              </div>
              <div className={styles.buttons}>
                 <button className={styles.btnEdit}>Edit</button>
-                <button className={styles.btnLogOut}>Log Out</button>
+                <button className={styles.btnLogOut} onClick={logOut}>Log Out</button>
              </div>
                  </div>
          </div>
