@@ -42,6 +42,7 @@ const Login = () => {
         throw new Error ('faka izimfaneko zakhona.')
       }
 
+    
       dispatch(loginSuccess(matchingUsers[0]));
       navigate('/home')
     }catch (err: unknown){
