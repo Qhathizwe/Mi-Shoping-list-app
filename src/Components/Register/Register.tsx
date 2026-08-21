@@ -1,117 +1,123 @@
 import styles from './Register.module.css';
-
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { useState, useEffect } from 'react';
+import { registerUserThunk, resetRegisterState, type RegisteredUserForm } from '../../Redux/Reducers/RegisterSlice';
 
-import { useAppDispatch, useAppSelector } from '../../store'
-
-import { registerStart,registerSuccess, registerFailure, } from '../../Redux/Reducers/RegisterSlice';
-import { useState} from 'react';
-
-const Register = () => {
-
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
-
-  const navigate = useNavigate();
+export const Register: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  
+  // Note: Ensure your store root state uses the exact name (e.g., state.register or state.auth)
+  const { isLoading, error, isSuccess, user } = useAppSelector((state) => state.register); 
 
-  const {isLoading, error} = useAppSelector((state) => state.register);
+  const [formData, setFormData] = useState<RegisteredUserForm>({
+    name: '',
+    surname: '',
+    email: '',
+    phone: '',
+    password: '',
+  });
 
-  const registerUser = async (e: React.FormEvent) =>{
-    e.preventDefault();
-    dispatch(registerStart());
-
-    try {
-      // Send a POST request to your local database
-      const response = await fetch('http://localhost:5000/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          surname,
-          email,
-          phone,
-          password
-        }),
-      });
-
-      if (!response.ok){
-        throw new Error('Aku Registe(kanga). inkinga ikwi Server.');
-      }
-
-      const newUserProfile = await response.json();
-
-      dispatch(registerSuccess(newUserProfile));
-
-      navigate('/');
-    }catch (err: unknown){
-      if (err instanceof Error){
-        dispatch(registerFailure(err.message))
-      }else{
-        dispatch(registerFailure('Bheka umsamu.'));
-      }
+  // Handle side effects like success alerts and cleanup inside useEffect
+  useEffect(() => {
+    if (isSuccess && user) {
+       alert(`Registered Successfully! Welcome ${user.name}`);
+     
+      dispatch(resetRegisterState());
     }
+  }, [isSuccess, user, dispatch]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
-    const errorStyle = error? {border: '1px solid red', boxShadow: '0 0 5px red'}: {};
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(registerUserThunk(formData));
+    
+
+    navigate('/');
+  };
+
+  const errorStyle = error ? { border: '1px solid red', boxHex: '0 0 5px red' } : {};
+
   return (
     <div className={styles.container}>
-      <form className={styles.content} onSubmit={registerUser}>
+      <form className={styles.content} onSubmit={handleSubmit}>
         <h1 className={styles.title}>
           Please <span className={styles.titleGreen}>Register</span> Your Account
         </h1>
 
-         {error && <p style={{ color: 'red', margin: '0 0 10px 0', fontSize: '14px' }}>{error}</p>}
+        {error && <p style={{ color: 'red', margin: '0 0 10px 0', fontSize: '14px' }}>{error}</p>}
 
         <div className={styles.nameSurname}>
-          <input type="text"
-           placeholder="Name" 
-           className={styles.inputHalf}
-           value={name}
-          onChange={(e) => setName(e.target.value)}
-          style={errorStyle}
-          required />
+          <input 
+            type="text"
+            name="name"
+            placeholder="Name" 
+            className={styles.inputHalf}
+            value={formData.name}
+            onChange={handleChange}
+            style={errorStyle}
+            required 
+          />
 
-          <input type="text" 
-          placeholder="Surname" 
-          className={styles.inputHalf} 
-          value={surname}
-          onChange={(e) => setSurname(e.target.value)}
-          style={errorStyle}
-          required/>
+          <input 
+            type="text" 
+            name="surname"
+            placeholder="Surname" 
+            className={styles.inputHalf} 
+            value={formData.surname}
+            onChange={handleChange}
+            style={errorStyle}
+            required
+          />
         </div>
         
-        <input type="email" 
-        placeholder="Email" 
-        className={styles.inputFull} 
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        style={errorStyle}
-        required/>
+        <input 
+          type="email" 
+          name="email"
+          placeholder="Email" 
+          className={styles.inputFull} 
+          value={formData.email}
+          onChange={handleChange}
+          style={errorStyle}
+          required
+        />
 
-        <input type="text" 
-        placeholder="Phone Number" 
-        className={styles.inputFull}
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        style={errorStyle}
-        required />
-        <input type="password" 
-        placeholder="Password" 
-        className={styles.inputFull} 
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        style={errorStyle}
-        required/>
+        <input 
+          type="text" 
+          name="phone"
+          placeholder="Phone Number" 
+          className={styles.inputFull}
+          value={formData.phone}
+          onChange={handleChange}
+          style={errorStyle}
+          required 
+        />
+        
+        <input 
+          type="password" 
+          name="password"
+          placeholder="Password" 
+          className={styles.inputFull} 
+          value={formData.password}
+          onChange={handleChange}
+          style={errorStyle}
+          required
+        />
         
         <button
-        className={styles.btnRegister}
-        disabled={isLoading}>
-        {isLoading? 'Registering...': 'Register'}
+          type="submit"
+          className={styles.btnRegister}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Registering...' : 'Register'}
         </button>
         
         <p className={styles.loginText}>
