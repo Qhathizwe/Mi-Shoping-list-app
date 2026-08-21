@@ -1,58 +1,82 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit";
 
-
-export interface RegisteredUser {
-  id: string;
+export interface RegisteredUserForm {
   name: string;
   surname: string;
   email: string;
   phone: string;
-  password: string; 
+  password: string;
 }
 
-interface RegisterState {
-  user: RegisteredUser | null; 
+export interface SavedUser extends RegisteredUserForm {
+  id?: string;
+}
+
+interface AuthState {
+  user: SavedUser | null;
   isSuccess: boolean;
   isLoading: boolean;
   error: string | null;
 }
 
-const initialState: RegisterState = {
+const initialState: AuthState = {
   user: null,
   isSuccess: false,
   isLoading: false,
   error: null,
 };
 
+export const registerUserThunk = createAsyncThunk<SavedUser, RegisteredUserForm, { rejectValue: string }>(
+  "auth/RegisterUser",
+  async (FormData, { rejectWithValue }) => {
+    try {
+      const response = await fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(FormData),
+      });
+      if (!response.ok) throw new Error("Failed to save credentials");
+      const data: SavedUser = await response.json();
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.message || "Something went wrong");
+    }
+  }
+);
+
 const registerSlice = createSlice({
-  name: 'register',
+  name: "register",
   initialState,
   reducers: {
-    registerStart: (state) => {
-      state.isLoading = true;
-      state.error = null;
-      state.isSuccess = false;
-    },
-    // Saves the complete response data object coming back from json-server
-    registerSuccess: (state, action: PayloadAction<RegisteredUser>) => {
-      state.isLoading = false;
-      state.isSuccess = true;
-      state.user = action.payload; 
-      state.error = null;
-    },
-    registerFailure: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-      state.isSuccess = false;
-    },
     resetRegisterState: (state) => {
       state.user = null;
       state.isSuccess = false;
       state.isLoading = false;
       state.error = null;
-    }
-  }
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(registerUserThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+        state.isSuccess = false;
+      })
+      .addCase(registerUserThunk.fulfilled, (state, action: PayloadAction<SavedUser>) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+        state.error = null;
+      })
+      .addCase(registerUserThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.user = null;
+        state.error = action.payload ?? "An unknown error occurred";
+      });
+  },
 });
 
-export const { registerStart, registerSuccess, registerFailure, resetRegisterState } = registerSlice.actions;
+
+export const { resetRegisterState } = registerSlice.actions;
 export default registerSlice.reducer;
