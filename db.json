@@ -12,6 +12,23 @@
       "phone": "0699342225",
       "password": "12345",
       "id": "nafneaLh2dY"
+    },
+    {
+      "name": "Scelo ",
+      "surname": "Dom",
+      "email": "dom@gmail.com",
+      "phone": "012023032",
+      "password": "password",
+      "id": "EfYdrnLdRo8"
+    },
+    {
+      "name": "sam",
+      "surname": "khathi",
+      "email": "spho@gmail.com",
+      "phone": "02132143",
+      "password": "password12345",
+      "id": "_b7OYFyTAjk"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
