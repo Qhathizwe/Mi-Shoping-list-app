@@ -1,87 +1,78 @@
+import React from 'react';
 import styles from './Login.module.css';
-
-import { NavLink } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-
-import { useAppDispatch } from '../../store';
-import { useAppSelector } from '../../store';
-
-
-import { loginStart, loginSuccess, loginFailure } from '../../Redux/Reducers/LoginSlice';
-import { useState } from 'react';
-
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { updateLoginField, loginUserThunk } from '../../Redux/Reducers/LoginSlice';
 
 const Login = () => {
-  const[email, setEmail] =useState('');
-  const[password, setPassword]= useState('');
-
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const {isLoading, error} = useAppSelector((state) => state.auth);
+  const { form, isLoading, error } = useAppSelector((state) => state.auth);
 
-    const LoginToHome = async (e: React.FormEvent) =>{
+  // 2. Type-safe input change handler using keyof typeof form to update the global store
+  const handleChange = (field: keyof typeof form, value: string) => {
+    dispatch(updateLoginField({ field, value }));
+  };
+
+  // 3. Execution block that triggers on form submission
+  const loginToHome = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    dispatch(loginStart());
+    try {
+      // Dispatches form data and unwraps the response object directly upon verification
+      const loggedInUser = await dispatch(loginUserThunk(form)).unwrap();
 
-    try{
-      const response = await fetch(
-        `http://localhost:5000/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
-      );
+      alert(`Welcome back, ${loggedInUser.name}! Login successful.`);
 
-      if (!response.ok){
-        throw new Error ('kukhona inkinga kwi server yakho.');
-      }
-
-      const matchingUsers = await response.json();
-      if(!matchingUsers){
-        throw new Error ('akusiyona yi email noma yi password.')
-      }
-      if (matchingUsers.length === 0){
-        throw new Error ('faka izimfaneko zakhona.')
-      }
-
-      dispatch(loginSuccess(matchingUsers[0]));
-      navigate('/home')
-    }catch (err: unknown){
-      if (err instanceof Error)
-      dispatch(loginFailure(err.message || 'Kukhona Okungahambi kahle lungisa umsamu.'));
+      navigate('/home');
+    } catch (err) {
+      // Any rejected errors from loginUserThunk automatically populate state.error
+      console.error("Login pipeline execution error handled: ", err);
     }
-    
-  }
+  };
+
+  const errorStyle = error ? { border: '1px solid red', boxShadow: '0 0 5px red' } : {};
+
   return (
-    // run server
-    // npx json-server --watch db.json --port 5000
-    <form className={styles.LoginContainer}>
+    /* 
+      Running local database command indicator:
+      npx json-server --watch db.json --port 5000
+    */
+    <form className={styles.LoginContainer} onSubmit={loginToHome}>
       <div className={styles.LoginContent}>
         <h1 className={styles.title}>
           Please <span className={styles.tGreen}>Login</span> Your Account
         </h1>
+        
         {error && <p style={{ color: 'red', marginBottom: '10px' }}>{error}</p>}
+        
         <input 
-        type="email" 
-        placeholder="Enter Your email" 
-        className={styles.loginInput} 
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        style={error ? { border: '1px solid red', boxShadow: '0 0 5px red' } : {}}
-        required/>
+          type="email" 
+          placeholder="Enter Your email" 
+          className={styles.loginInput} 
+          value={form.email}
+          onChange={(e) => handleChange('email', e.target.value)}
+          style={errorStyle}
+          required
+        />
 
         <input 
-        type="password" 
-        placeholder="Enter Your Password" 
-        className={styles.loginInput}
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        style={error ? { border: '1px solid red', boxShadow: '0 0 5px red' } : {}}
-        required />
+          type="password" 
+          placeholder="Enter Your Password" 
+          className={styles.loginInput}
+          value={form.password}
+          onChange={(e) => handleChange('password', e.target.value)}
+          style={errorStyle}
+          required 
+        />
         
         <button 
-        className={styles.btnLogin} 
-        onClick={LoginToHome}
-        disabled={isLoading}>
-        {isLoading? 'Logging in...' : 'Login'}
+          type="submit"
+          className={styles.btnLogin} 
+          disabled={isLoading}
+        >
+          {isLoading ? 'Logging in...' : 'Login'}
         </button>
         
         <p className={styles.registerText}>
