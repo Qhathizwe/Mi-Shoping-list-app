@@ -12,6 +12,23 @@
       "phone": "0699342225",
       "password": "password12345",
       "id": "nafneaLh2dY"
+    },
+    {
+      "name": "Scelo Mike",
+      "surname": "Phoswa",
+      "email": "solveforx234@gmail.com",
+      "phone": "0699342225",
+      "password": "hhhh",
+      "id": "do9dSaUvA00"
+    },
+    {
+      "name": "Fortunate Nombuso",
+      "surname": "Gumede",
+      "email": "sphoswa2@gmail.com",
+      "phone": "0720100137",
+      "password": "password",
+      "id": "TfCMhwP0qTU"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
