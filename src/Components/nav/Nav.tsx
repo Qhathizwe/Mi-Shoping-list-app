@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 const Nav = () => {
 
   const navigate = useNavigate();
-    const navigateToProfile = () =>{
+  const navigateToProfile = () =>{
         navigate ("/profile")
     }
   return (
