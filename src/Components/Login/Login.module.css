@@ -54,7 +54,7 @@
 
 .loginInput:hover {
   box-shadow: 0px 0px 12px #06df06;
-  transform: scale(1.02); /* Subtle pop effect */
+  transform: scale(1.02);
   cursor: pointer;
 }
 
