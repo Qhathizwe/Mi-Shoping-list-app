@@ -25,10 +25,31 @@ const Login = () => {
 
       alert(`Welcome back, ${loggedInUser.name}! Login successful.`);
 
+<<<<<<< HEAD
       navigate('/home');
     } catch (err) {
       // Any rejected errors from loginUserThunk automatically populate state.error
       console.error("Login pipeline execution error handled: ", err);
+=======
+      if (!response.ok){
+        throw new Error ('kukhona inkinga kwi server yakho.');
+      }
+
+      const matchingUsers = await response.json();
+      if(!matchingUsers){
+        throw new Error ('akusiyona yi email noma yi password.')
+      }
+      if (matchingUsers.length === 0){
+        throw new Error ('faka izimfaneko zakhona.')
+      }
+
+    
+      dispatch(loginSuccess(matchingUsers[0]));
+      navigate('/home')
+    }catch (err: unknown){
+      if (err instanceof Error)
+      dispatch(loginFailure(err.message || 'Kukhona Okungahambi kahle lungisa umsamu.'));
+>>>>>>> 91353dc2bced69ebb93ee203eefa815737d9a4a2
     }
   };
 
