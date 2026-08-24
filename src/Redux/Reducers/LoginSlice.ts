@@ -9,7 +9,7 @@ export interface User {
 }
 
 interface AuthState {
-  // 1. Centralized form tracking fields to hold keystroke values
+  
   form: Omit<User, 'id'>;
   user: User | null;
   isLoading: boolean;
@@ -57,14 +57,14 @@ const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    // 3. FORM ACTION: Tracks input changes globally across keystrokes
+ 
     updateLoginField: (
       state,
       action: PayloadAction<{ field: keyof AuthState['form']; value: string }>
     ) => {
       state.form[action.payload.field] = action.payload.value;
     },
-    // 4. CLEANER COMPONENT ACTIONS:
+  
     resetLoginForm: (state) => {
       state.form = { email: '', password: '' };
       state.error = null;
@@ -75,7 +75,7 @@ const loginSlice = createSlice({
       state.error = null;
     }
   },
-  // 5. BUILDER: Catches async actions fired by your Thunk pipeline automatically
+  
   extraReducers: (builder) => {
     builder
       .addCase(loginUserThunk.pending, (state) => {
