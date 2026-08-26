@@ -2,17 +2,15 @@ import styles from './Profile.module.css';
 import profile from '../../assets/profile.avif';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../store'; // 1. Import your custom dispatch hook
-import { logOut } from '../../Redux/Reducers/LoginSlice'; // 2. Import your logout action
+import { logOut } from '../../Redux/Reducers/LoginSlice'; 
+import back from '../../assets/back.webp'
 
 const Profile = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch(); // 3. Initialize the dispatch function
+  const dispatch = useAppDispatch(); 
 
   const logout = () => {
-    // 4. Wipe user credentials out of global Redux state completely
     dispatch(logOut());
-    
-    // 5. Safely redirect them out to the login view
     navigate("/");
   };
 
