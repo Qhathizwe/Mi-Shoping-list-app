@@ -14,22 +14,6 @@
       "id": "nafneaLh2dY"
     },
     {
-<<<<<<< HEAD
-      "name": "Scelo Mike",
-      "surname": "Phoswa",
-      "email": "solveforx234@gmail.com",
-      "phone": "0699342225",
-      "password": "hhhh",
-      "id": "do9dSaUvA00"
-    },
-    {
-      "name": "Fortunate Nombuso",
-      "surname": "Gumede",
-      "email": "sphoswa2@gmail.com",
-      "phone": "0720100137",
-      "password": "password",
-      "id": "TfCMhwP0qTU"
-=======
       "name": "Scelo ",
       "surname": "Dom",
       "email": "dom@gmail.com",
@@ -44,8 +28,76 @@
       "phone": "02132143",
       "password": "password12345",
       "id": "_b7OYFyTAjk"
->>>>>>> 91353dc2bced69ebb93ee203eefa815737d9a4a2
+    },
+    {
+      "name": "Nokuphiwa",
+      "surname": "Shange",
+      "email": "shangenokuphiwa683@gmail.com",
+      "phone": "0636777546",
+      "password": "Phiwa@02",
+      "id": "W8NKM8lDeOE"
+    },
+    {
+      "name": "fabian",
+      "surname": "blose",
+      "email": "fb@gmail.com",
+      "phone": "07805604695",
+      "password": "fabian02",
+      "id": "5OxXg3778pk"
     }
   ],
+  "category": [
+    {
+      "userId": "nafneaLh2dY",
+      "name": "hh",
+      "id": "Fc_5x05rnRI"
+    },
+    {
+      "userId": "nafneaLh2dY",
+      "name": "ok",
+      "id": "U5rjR6TR0MI"
+    },
+    {
+      "userId": "nafneaLh2dY",
+      "name": "hhhjjvfhjfd",
+      "id": "jIVi1OY1KzY"
+    },
+    {
+      "userId": "nafneaLh2dY",
+      "name": "bye",
+      "id": "m130YLUaC-E"
+    },
+    {
+      "userId": "nafneaLh2dY",
+      "name": "grocery",
+      "id": "dXqQ_Ulbgeg"
+    },
+    {
+      "userId": "5OxXg3778pk",
+      "name": "grocery",
+      "id": "xOPUO1NCf64"
+    },
+    {
+      "userId": "5OxXg3778pk",
+      "name": "alcohol",
+      "id": "GIE2XeqtT1w"
+    },
+    {
+      "userId": "5OxXg3778pk",
+      "name": "grocery",
+      "id": "Gqg4NoEk9KY"
+    },
+    {
+      "userId": "5OxXg3778pk",
+      "name": "alcohol",
+      "id": "tY8mekcfnMA"
+    },
+    {
+      "userId": "5OxXg3778pk",
+      "name": "grocery",
+      "id": "RAwUepM2J0g"
+    }
+  ],
+  "categoryItems": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

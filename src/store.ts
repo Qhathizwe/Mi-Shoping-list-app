@@ -2,8 +2,11 @@ import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import {type TypedUseSelectorHook } from 'react-redux'
+
 import loginSlice from './Redux/Reducers/LoginSlice'
 import registerSlice from './Redux/Reducers/RegisterSlice'
+import categorySlice from './Redux/Reducers/CategorySlice'
+import profileSlice from './Redux/Reducers/ProfileSlice'
 
 
 
@@ -11,6 +14,8 @@ export const store = configureStore({
   reducer: {
       auth: loginSlice,
       register: registerSlice,
+      profile : profileSlice,
+      category : categorySlice,
   },
 })
 
