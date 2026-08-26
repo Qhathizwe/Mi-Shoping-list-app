@@ -1,0 +1,9 @@
+.btns{
+    display: flex;
+    align-content: center;
+    
+}
+.btnShare{
+    background-color: grey;
+    color: black;
+}
