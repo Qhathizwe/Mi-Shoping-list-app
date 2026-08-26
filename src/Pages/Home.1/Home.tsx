@@ -1,20 +1,71 @@
-import styles from './Home.module.css'
-import Nav from "../../Components/nav/Nav"
+// Home.tsx
+import React, { useEffect, useState } from 'react';
+import styles from './Home.module.css';
+import Nav from "../../Components/nav/Nav";
+import add from '../../assets/add.jpg';
+import sortBy from '../../assets/sort by.png';
+import Modal from '../../Components/Modal/Modal';
 
-import add from '../../assets/add.jpg'
-import sortBy from '../../assets/sort by.png'
+import { useAppDispatch, useAppSelector } from '../../store'; 
+import { addCategoryThunk, getCategoryThunk } from '../../Redux/Reducers/CategorySlice'; 
+import CategoryCard from '../../Components/Category/CategoryCard';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store';
+import { useNavigate } from 'react-router-dom';
 
-import Modal from '../../Components/Modal/Modal'
-import { useState } from 'react'
 
 
-const Home = () => {
+const Home: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+  const { isLoading, error } = useAppSelector((state) => state.category);
+  
+  const user = useAppSelector((state) => state.auth.user); 
 
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [categoryName, setCategoryName] = useState<string>('');
+
+  const categoryLists = useSelector ((state: RootState) => state.category);
+  
+
+  //fetchin all the data 
+  useEffect(() =>{dispatch(getCategoryThunk());
+    }, []);
+
+  const navigateToCategoryItems = () => {
+      navigate ('/categoryItems');
+    }
+
+  const handleAddCategory = () => {
+  
+    
+    if (!categoryName.trim()) {
+      alert('Please enter a category name');
+      return;
+    }
+
+    if (!user) {
+      alert('User is not logged in');
+      return;
+    }
+
+    dispatch(addCategoryThunk({ 
+      userId: user.id, 
+     name:categoryName
+    }))
+      .unwrap()
+      .then(() => {
+        setCategoryName(''); 
+        setIsModalOpen(false); 
+      })
+      .catch((err) => {
+        console.error('Failed to add category:', err);
+      });
+  };
   return (
     <div>
-      < Nav />
+      <Nav />
       <div className={styles.helloContainer}>
         <div className={styles.helloUser}>
           <h3>Hello User</h3>
@@ -22,25 +73,54 @@ const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
         </div>
 
         <div className={styles.storedAdd}>
-          <img src={add} alt="add button" className={styles.addIcon} onClick={() => setIsModalOpen(true)}/>
+          <img 
+            src={add} 
+            alt="add button" 
+            className={styles.addIcon} 
+            onClick={() => setIsModalOpen(true)}
+          />
           <h3> Stored Lists</h3>
           <img src={sortBy} alt="sort by" className={styles.sortBy} />
+        
         </div>
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-          <input 
-          type="text" 
-          placeholder='Enter the name of Category' 
-          className={styles.Category} />
-
-          <div className={styles.btns}>
-            <button className={styles.btnAdd}>Add</button>
-            <button className={styles.btnDelete}>Delete</button>
+          <div>
+           {categoryLists.category.map ((link) =>(
+              <CategoryCard key={link.id} category={link} onClick={navigateToCategoryItems} />
+            ))}
           </div>
 
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <input 
+            type="text" 
+            placeholder='Enter the name of Category' 
+            className={styles.Category}
+            value={categoryName}
+            onChange={(e) => setCategoryName(e.target.value)}
+            disabled={isLoading}
+          />
+
+          {error && <p style={{ color: 'red', fontSize: '0.85rem', margin: '0.5rem 0' }}>{error}</p>}
+
+          <div className={styles.btns}>
+            <button 
+              className={styles.btnAdd} 
+              onClick={handleAddCategory}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Adding...' : 'Add'}
+            </button>
+            <button 
+              className={styles.btnDelete} 
+              onClick={() => setIsModalOpen(false)}
+              disabled={isLoading}
+            >
+              Cancel
+            </button>
+          </div>
         </Modal>
       </div>
    </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
