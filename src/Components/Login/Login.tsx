@@ -10,56 +10,25 @@ const Login = () => {
 
   const { form, isLoading, error } = useAppSelector((state) => state.auth);
 
-  // 2. Type-safe input change handler using keyof typeof form to update the global store
   const handleChange = (field: keyof typeof form, value: string) => {
     dispatch(updateLoginField({ field, value }));
   };
 
-  // 3. Execution block that triggers on form submission
   const loginToHome = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      // Dispatches form data and unwraps the response object directly upon verification
       const loggedInUser = await dispatch(loginUserThunk(form)).unwrap();
-
       alert(`Welcome back, ${loggedInUser.name}! Login successful.`);
-
-<<<<<<< HEAD
       navigate('/home');
     } catch (err) {
-      // Any rejected errors from loginUserThunk automatically populate state.error
       console.error("Login pipeline execution error handled: ", err);
-=======
-      if (!response.ok){
-        throw new Error ('kukhona inkinga kwi server yakho.');
-      }
-
-      const matchingUsers = await response.json();
-      if(!matchingUsers){
-        throw new Error ('akusiyona yi email noma yi password.')
-      }
-      if (matchingUsers.length === 0){
-        throw new Error ('faka izimfaneko zakhona.')
-      }
-
-    
-      dispatch(loginSuccess(matchingUsers[0]));
-      navigate('/home')
-    }catch (err: unknown){
-      if (err instanceof Error)
-      dispatch(loginFailure(err.message || 'Kukhona Okungahambi kahle lungisa umsamu.'));
->>>>>>> 91353dc2bced69ebb93ee203eefa815737d9a4a2
     }
   };
 
   const errorStyle = error ? { border: '1px solid red', boxShadow: '0 0 5px red' } : {};
 
   return (
-    /* 
-      Running local database command indicator:
-      npx json-server --watch db.json --port 5000
-    */
     <form className={styles.LoginContainer} onSubmit={loginToHome}>
       <div className={styles.LoginContent}>
         <h1 className={styles.title}>
