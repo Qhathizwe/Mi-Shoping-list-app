@@ -5,6 +5,7 @@ import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
 import Home from './Pages/Home.1/Home'
 import  Profile  from './Pages/Profile/Profile'
+import CategoryItems from './Pages/CategoryItems/CategoryItems'
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path='/register' element={<Register />}/>
         <Route path='/home' element={<Home />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/categoryItems' element={<CategoryItems />} />
       </Routes>
     </>
   )
