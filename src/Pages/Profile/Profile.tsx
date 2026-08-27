@@ -18,6 +18,7 @@ const Profile = () => {
     <div className={styles.profileContainer}>
       <div className={styles.profileContent}>
         <div className={styles.profile}>
+          <img src={back} alt="back btn" />
           <img src={profile} alt="profile" />
         </div>
         <div className={styles.profileInputs}>

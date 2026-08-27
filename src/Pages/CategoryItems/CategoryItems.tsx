@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './CategoryItems.module.css'
 import CategoryItemCard from '../../Components/Catergory-Item/CategoryItemCard'
 import { useSelector } from 'react-redux'
