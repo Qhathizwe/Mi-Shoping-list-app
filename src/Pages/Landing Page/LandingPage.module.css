@@ -100,7 +100,7 @@
 }
 
 .ctaButton:hover {
-  background-color:  #008000; /* Darker green on hover */
+  background-color:  #008000; 
   transform: translateY(-2px);
   box-shadow: 0 15px 20px -3px  #008000;
 }
