@@ -14,7 +14,7 @@ const Register: React.FC = () => {
     name: '',
     surname: '',
     email: '',
-    phone: '',
+    cellNumber: '', 
     password: '',
   });
 
@@ -22,7 +22,7 @@ const Register: React.FC = () => {
     if (isSuccess && user) {
       alert(`Registered Successfully! Welcome ${user.name}`);
       dispatch(resetRegisterState());
-      navigate('/');
+      navigate('/'); 
     }
   }, [isSuccess, user, dispatch, navigate]);
 
@@ -85,12 +85,13 @@ const Register: React.FC = () => {
           required
         />
 
+        
         <input 
           type="text" 
-          name="phone"
-          placeholder="Phone Number" 
+          name="cellNumber"
+          placeholder="Cell Number" 
           className={styles.inputFull}
-          value={formData.phone}
+          value={formData.cellNumber}
           onChange={handleChange}
           style={errorStyle}
           required 

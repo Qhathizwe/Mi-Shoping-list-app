@@ -1,103 +1,239 @@
 {
   "users": [
     {
-      "id": "1",
-      "email": "solveforx@example.com",
-      "password": "password123"
-    },
-    {
-      "name": "Scelo",
+      "name": "Scelo ",
       "surname": "Phoswa",
       "email": "sphoswa2@gmail.com",
-      "phone": "0699342225",
+      "cellNumber": "0699342225",
       "password": "password12345",
-      "id": "nafneaLh2dY"
-    },
-    {
-      "name": "Scelo ",
-      "surname": "Dom",
-      "email": "dom@gmail.com",
-      "phone": "012023032",
-      "password": "password",
-      "id": "EfYdrnLdRo8"
-    },
-    {
-      "name": "sam",
-      "surname": "khathi",
-      "email": "spho@gmail.com",
-      "phone": "02132143",
-      "password": "password12345",
-      "id": "_b7OYFyTAjk"
-    },
-    {
-      "name": "Nokuphiwa",
-      "surname": "Shange",
-      "email": "shangenokuphiwa683@gmail.com",
-      "phone": "0636777546",
-      "password": "Phiwa@02",
-      "id": "W8NKM8lDeOE"
-    },
-    {
-      "name": "fabian",
-      "surname": "blose",
-      "email": "fb@gmail.com",
-      "phone": "07805604695",
-      "password": "fabian02",
-      "id": "5OxXg3778pk"
+      "id": "SLbr59X9r_8"
     }
   ],
   "category": [
     {
-      "userId": "nafneaLh2dY",
-      "name": "hh",
-      "id": "Fc_5x05rnRI"
+      "name": "jbjjhbh",
+      "id": "JhMAy2i2z2k"
     },
     {
-      "userId": "nafneaLh2dY",
-      "name": "ok",
-      "id": "U5rjR6TR0MI"
+      "name": "rgergg",
+      "id": "yv3mJl6HGb4"
     },
     {
-      "userId": "nafneaLh2dY",
-      "name": "hhhjjvfhjfd",
-      "id": "jIVi1OY1KzY"
+      "name": "scclo",
+      "userId": "SLbr59X9r_8",
+      "id": "N8tsQz-fAPY"
     },
     {
-      "userId": "nafneaLh2dY",
-      "name": "bye",
-      "id": "m130YLUaC-E"
+      "name": "bjkbbjjkj",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "9HAkK5CwbhQ"
     },
     {
-      "userId": "nafneaLh2dY",
-      "name": "grocery",
-      "id": "dXqQ_Ulbgeg"
-    },
-    {
-      "userId": "5OxXg3778pk",
-      "name": "grocery",
-      "id": "xOPUO1NCf64"
-    },
-    {
-      "userId": "5OxXg3778pk",
       "name": "alcohol",
-      "id": "GIE2XeqtT1w"
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "8N9t4quEiis"
     },
     {
-      "userId": "5OxXg3778pk",
-      "name": "grocery",
-      "id": "Gqg4NoEk9KY"
-    },
-    {
-      "userId": "5OxXg3778pk",
       "name": "alcohol",
-      "id": "tY8mekcfnMA"
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "fZB6FS5rgzw"
     },
     {
-      "userId": "5OxXg3778pk",
-      "name": "grocery",
-      "id": "RAwUepM2J0g"
+      "name": "Alcohol",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "DmfMLwKMfek"
+    },
+    {
+      "name": "Grocery",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "vxWUnkrQbJE"
+    },
+    {
+      "name": "Grocery",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "owIyufDbALA"
+    },
+    {
+      "name": "Grocery",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "6vq6uv0UIZM"
+    },
+    {
+      "name": "Grocery",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "NSUkSYsnQ_k"
+    },
+    {
+      "name": "gROCERY",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "ylyPrJKFgOo"
+    },
+    {
+      "name": "NNVNV",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "P7yeAT-wBZU"
+    },
+    {
+      "name": "DDCDF",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "h4RRxpucGUM"
+    },
+    {
+      "name": "sdas",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "kNEp4YXPEhA"
+    },
+    {
+      "name": "ssfsd",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "5HVdPva6lAM"
+    },
+    {
+      "name": "dgfdgdgfd",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "Kkbhw0ZygQs"
+    },
+    {
+      "name": "ldasdlk",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "4HPUgCtg5vg"
+    },
+    {
+      "name": "Grocery",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "N5RzdgBw080"
     }
   ],
-  "categoryItems": [],
+  "categoryItems": [
+    {
+      "name": "LNLN",
+      "quantity": 12,
+      "notes": "LNLKKL",
+      "picture": "",
+      "categoryId": "N8tsQz-fAPY",
+      "userId": "SLbr59X9r_8",
+      "id": "iLVy-tdiLaQ"
+    },
+    {
+      "name": "amanzi amponjwana",
+      "quantity": 12,
+      "notes": "tops",
+      "picture": "",
+      "categoryId": "N8tsQz-fAPY",
+      "userId": "SLbr59X9r_8",
+      "id": "c_wIBhUBoO4"
+    },
+    {
+      "name": "dsaldsad",
+      "quantity": 1,
+      "notes": "nlnk",
+      "picture": "",
+      "categoryId": "8N9t4quEiis",
+      "userId": "SLbr59X9r_8",
+      "id": "CT4mC_FHp08"
+    },
+    {
+      "name": "bbbb",
+      "quantity": 1,
+      "notes": "bbb",
+      "picture": "",
+      "categoryId": "8N9t4quEiis",
+      "userId": "SLbr59X9r_8",
+      "id": "Cf629xHfNyY"
+    },
+    {
+      "name": "beer",
+      "quantity": 12,
+      "notes": "tops",
+      "picture": "",
+      "categoryId": "fZB6FS5rgzw",
+      "userId": "SLbr59X9r_8",
+      "id": "I5TpmlO4CGY"
+    },
+    {
+      "name": "jameson",
+      "quantity": 1,
+      "notes": "tops",
+      "picture": "",
+      "categoryId": "fZB6FS5rgzw",
+      "userId": "SLbr59X9r_8",
+      "id": "JrJmSO9CqYU"
+    },
+    {
+      "name": "amazambane",
+      "quantity": 1,
+      "notes": "emgwaqweni",
+      "picture": "",
+      "categoryId": "owIyufDbALA",
+      "userId": "SLbr59X9r_8",
+      "id": "hyiJCO_TNxI"
+    },
+    {
+      "name": "Meat",
+      "quantity": 1,
+      "notes": "Bluff",
+      "picture": "",
+      "categoryId": "owIyufDbALA",
+      "userId": "SLbr59X9r_8",
+      "id": "VVqpRO3aBv8"
+    },
+    {
+      "name": "apples",
+      "quantity": 2,
+      "notes": "fruitand vaggies",
+      "picture": "",
+      "categoryId": "N5RzdgBw080",
+      "userId": "SLbr59X9r_8",
+      "id": "9f-389U0TjY"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

@@ -1,37 +1,102 @@
-// Home.tsx
 import React, { useEffect, useState } from 'react';
 import styles from './Home.module.css';
 import Nav from "../../Components/nav/Nav";
 import add from '../../assets/add.jpg';
-import sortBy from '../../assets/sort by.png';
+import sortByImg from '../../assets/sort by.png';
 import Modal from '../../Components/Modal/Modal';
+import Search from '../../Components/Search/Search'; // Imported custom search component
 
-import { useAppDispatch, useAppSelector } from '../../store'; 
-import { addCategoryThunk, getCategoryThunk } from '../../Redux/Reducers/CategorySlice'; 
+import { useAppDispatch, useAppSelector, type RootState } from '../../store'; 
+import { 
+  addCategoryThunk, 
+  getCategoryThunk, 
+  updateCategoryThunk, 
+  deleteCategoryThunk, 
+  shareCategoryThunk,
+  type Category
+} from '../../Redux/Reducers/CategorySlice'; 
 import CategoryCard from '../../Components/Category/CategoryCard';
-import { useSelector } from 'react-redux';
-import type { RootState } from '../../store';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const { isLoading, error } = useAppSelector((state) => state.category);
-  
-  const user = useAppSelector((state) => state.auth.user); 
+  // Redux state connections
+  const { category: categories, isLoading, error } = useAppSelector((state) => state.category);
+  let user = useAppSelector ((state: RootState) => state.auth.user);
+ 
+   if (!user){
+     user = JSON.parse(localStorage.getItem("User")!)
+     console.log(user)
+   }
 
+  // --- Assessment URL Integration Engine ---
+  const queryParams = new URLSearchParams(location.search);
+  const urlSearchKeyword = queryParams.get('search') || '';
+  const urlSortKeyword = queryParams.get('sort') || 'name'; 
+
+  // Local state tied directly to active URL parameters
+  const [searchInput, setSearchInput] = useState<string>(urlSearchKeyword);
+
+  // Modal UI state controls
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [categoryName, setCategoryName] = useState<string>('');
+  const [editingCategory, setEditingCategory] = useState<Category | null>(null);
+  const [localCategoryName, setLocalCategoryName] = useState<string>('');
+  const [isShareModalOpen, setIsShareModalOpen] = useState<boolean>(false);
+  const [activeShareCategory, setActiveShareCategory] = useState<Category | null>(null);
+  const [shareEmail, setShareEmail] = useState<string>('');
 
-  const categoryLists = useSelector ((state: RootState) => state.category);
-  
+  useEffect(() => {
+    if (user?.id) {
+       dispatch(getCategoryThunk(user.id));
+    }   
+  }, [dispatch, user?.id]);
 
-  //fetchin all the data 
-  useEffect(() =>{dispatch(getCategoryThunk());
-    }, []);
+  // Listen to address bar modifications to fulfill sync requirements [INDEX 0.1.2]
+  useEffect(() => {
+    setSearchInput(urlSearchKeyword);
+  }, [urlSearchKeyword]);
+
+  const updateURLParams = (searchVal: string, sortVal: string) => {
+    const params = new URLSearchParams();
+    if (searchVal) params.set('search', searchVal);
+    if (sortVal) params.set('sort', sortVal);
+    navigate(`${location.pathname}?${params.toString()}`, { replace: true });
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setSearchInput(val);
+    updateURLParams(val, urlSortKeyword);
+  };
+
+  const handleSortCycle = () => {
+    const nextSort = urlSortKeyword === 'name' ? 'date' : 'name';
+    updateURLParams(urlSearchKeyword, nextSort);
+  };
+
+  // --- Filtering & Sorting Processor ---
+  const processCategories = (): Category[] => {
+    if (!categories) return [];
+
+    let filtered = categories.filter(cat => 
+      cat.name.toLowerCase().includes(urlSearchKeyword.toLowerCase())
+    );
+
+    filtered = [...filtered].sort((a, b) => {
+      if (urlSortKeyword === 'date') {
+        return a.id.localeCompare(b.id);
+      }
+      return a.name.localeCompare(b.name);
+    });
+
+    return filtered;
+  };
+
+  const processedCategories = processCategories();
 
   const navigateToCategoryItems = (id: string, name: string) => {
     navigate('/categoryItems', { state: { categoryId: id, categoryName: name } });
@@ -59,19 +124,23 @@ const Home: React.FC = () => {
     dispatch(shareCategoryThunk({ category: activeShareCategory, targetEmail: shareEmail }))
       .unwrap()
       .then(() => {
-        setCategoryName(''); 
-        setIsModalOpen(false); 
-      })
-      .catch((err) => {
-        console.error('Failed to add category:', err);
+        setShareEmail('');
+        setIsShareModalOpen(false);
       });
   };
+
+  const handleCloseMainModal = () => {
+    setLocalCategoryName('');
+    setEditingCategory(null);
+    setIsModalOpen(false);
+  };
+
   return (
     <div>
       <Nav />
       <div className={styles.helloContainer}>
         <div className={styles.helloUser}>
-          <h3>Hello User</h3>
+          <h3>Hello {user?.name}</h3>
           <p>Welcome To Your Shopping Pal.</p>
         </div>
 
@@ -82,47 +151,86 @@ const Home: React.FC = () => {
             className={styles.addIcon} 
             onClick={() => setIsModalOpen(true)}
           />
-          <h3> Stored Lists</h3>
-          <img src={sortBy} alt="sort by" className={styles.sortBy} />
-        
+          
+          <Search value={searchInput} onChange={handleSearchChange} />
+
+          <div className={styles.sortIndicatorWrapper} onClick={handleSortCycle}>
+            <img src={sortByImg} alt="sort by" className={styles.sortBy} />
+            <span className={styles.sortTextLabel}>By: {urlSortKeyword}</span>
+          </div>
         </div>
-          <div>
-           {categoryLists.category.map ((link) =>(
-              <CategoryCard key={link.id} category={link} onClick={navigateToCategoryItems} />
-            ))}
-          </div>
 
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-          <input 
-            type="text" 
-            placeholder='Enter the name of Category' 
-            className={styles.Category}
-            value={categoryName}
-            onChange={(e) => setCategoryName(e.target.value)}
-            disabled={isLoading}
-          />
+        <div className={styles.listsGridContainer} style={{ width: '100%', maxWidth: '600px', margin: '0 auto' }}>
+          {processedCategories.length === 0 ? (
+            <p style={{ color: 'gray', textAlign: 'center', marginTop: '2rem' }}>No shopping lists match your search.</p>
+          ) : (
+            processedCategories.map((link) => (
+              <CategoryCard 
+                key={link.id} 
+                category={link} 
+                onClick={(action, categoryId) => {
+                  if (action === 'view') {
+                    navigateToCategoryItems(link.id, link.name);
+                  } else if (action === 'edit') {
+                    setEditingCategory(link);
+                    setLocalCategoryName(link.name);
+                    setIsModalOpen(true);
+                  } else if (action === 'share') {
+                    setActiveShareCategory(link);
+                    setIsShareModalOpen(true);
+                  } else if (action === 'delete') {
+                    if (window.confirm(`Delete the entire list: "${link.name}"?`)) {
+                      dispatch(deleteCategoryThunk(link.id));
+                    }
+                  }
+                }} 
+              />
+            ))
+          )}
+        </div>
 
-          {error && <p style={{ color: 'red', fontSize: '0.85rem', margin: '0.5rem 0' }}>{error}</p>}
-
-          <div className={styles.btns}>
-            <button 
-              className={styles.btnAdd} 
-              onClick={handleAddCategory}
+        {/* Modal components remain securely wired up here... */}
+        <Modal isOpen={isModalOpen} onClose={handleCloseMainModal}>
+          <h3>{editingCategory ? `Rename List: ${editingCategory.name}` : 'Create New List'}</h3>
+          <form onSubmit={handleAddOrUpdateCategory}>
+            <input 
+              type="text" 
+              placeholder='Enter the name of Category' 
+              className={styles.Category}
+              value={localCategoryName}
+              onChange={(e) => setLocalCategoryName(e.target.value)}
               disabled={isLoading}
-            >
-              {isLoading ? 'Adding...' : 'Add'}
-            </button>
-            <button 
-              className={styles.btnDelete} 
-              onClick={() => setIsModalOpen(false)}
-              disabled={isLoading}
-            >
-              Cancel
-            </button>
-          </div>
+              required
+            />
+            {error && <p style={{ color: 'red', fontSize: '0.85rem' }}>{error}</p>}
+            <div className={styles.btns}>
+              <button type="submit" className={styles.btnAdd} disabled={isLoading}>
+                {isLoading ? 'Processing...' : editingCategory ? 'Save' : 'Add'}
+              </button>
+              <button type="button" className={styles.btnDelete} onClick={handleCloseMainModal}>Cancel</button>
+            </div>
+          </form>
+        </Modal>
+
+        <Modal isOpen={isShareModalOpen} onClose={() => setIsShareModalOpen(false)}>
+          <h3>Collaborate on: {activeShareCategory?.name}</h3>
+          <form onSubmit={handleShareSubmit}>
+            <input 
+              type="email" 
+              placeholder="peer.profile@example.com" 
+              className={styles.Category}
+              value={shareEmail}
+              onChange={(e) => setShareEmail(e.target.value)}
+              required 
+            />
+            <div className={styles.btns} style={{ marginTop: '15px' }}>
+              <button type="submit" className={styles.btnAdd}>Grant Access</button>
+              <button type="button" className={styles.btnDelete} onClick={() => setIsShareModalOpen(false)}>Cancel</button>
+            </div>
+          </form>
         </Modal>
       </div>
-   </div>
+    </div>
   );
 };
 
