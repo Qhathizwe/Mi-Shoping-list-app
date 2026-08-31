@@ -3,6 +3,7 @@ import styles from './Login.module.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { updateLoginField, loginUserThunk } from '../../Redux/Reducers/LoginSlice';
+import type{ RootState }  from '../../store';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -13,6 +14,12 @@ const Login = () => {
   const handleChange = (field: keyof typeof form, value: string) => {
     dispatch(updateLoginField({ field, value }));
   };
+
+  let user = useAppSelector ((state: RootState) => state.auth.user);
+
+  if (!user){
+    user = JSON.parse(localStorage.getItem("User")!)
+  }
 
   const loginToHome = async (e: React.FormEvent) => {
     e.preventDefault();
