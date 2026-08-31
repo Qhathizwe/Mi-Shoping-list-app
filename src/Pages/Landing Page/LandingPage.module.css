@@ -1,0 +1,122 @@
+
+.wrapper {
+  background-color: black;
+  min-height: 100vh;
+  width: 100%;
+}
+
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  color:  #008000; 
+}
+/* Navbar Styling */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+}
+
+.navButton {
+  text-decoration: none;
+  color:  #008000; /* Neon green */
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  transition: all 0.2s;
+}
+
+.navButton:hover {
+  background-color: rgba(16, 185, 129, 0.1);
+  border-color:  #008000;
+}
+
+/* Hero Section Layout */
+.heroSection {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 4rem 0;
+}
+
+/* Responsive Grid for Desktop */
+@media (min-width: 768px) {
+  .heroSection {
+    grid-template-columns: 1.1fr 0.9fr;
+    padding: 6rem 0;
+  }
+}
+
+/* Text Content */
+.heroText {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3.75rem;
+  }
+}
+
+.highlight {
+  color:  #008000; /* Accent Green */
+}
+
+.description {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #9ca3af; /* Muted grey for description */
+  max-width: 500px;
+}
+
+/* Call to Action Button */
+.ctaButton {
+  display: inline-block;
+  align-self: flex-start;
+  text-decoration: none;
+  background-color:  #008000;
+  color: #0b0f19; /* Dark text on light background */
+  padding: 1rem 2.25rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border-radius: 50px;
+  box-shadow: 0 10px 15px -3px  #008000;
+  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.ctaButton:hover {
+  background-color:  #008000; /* Darker green on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 15px 20px -3px  #008000;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  
+}
+
+.heroImage {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  object-fit: cover;
+}
