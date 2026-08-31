@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Home.module.css';
+
 import Nav from "../../Components/nav/Nav";
 import add from '../../assets/add.jpg';
 import sortByImg from '../../assets/sort by.png';
+
 import Modal from '../../Components/Modal/Modal';
-import Search from '../../Components/Search/Search'; // Imported custom search component
+
+import Search from '../../Components/Search/Search'; 
 
 import { useAppDispatch, useAppSelector, type RootState } from '../../store'; 
 import { 
@@ -78,7 +81,6 @@ const Home: React.FC = () => {
     updateURLParams(urlSearchKeyword, nextSort);
   };
 
-  // --- Filtering & Sorting Processor ---
   const processCategories = (): Category[] => {
     if (!categories) return [];
 
@@ -189,7 +191,6 @@ const Home: React.FC = () => {
           )}
         </div>
 
-        {/* Modal components remain securely wired up here... */}
         <Modal isOpen={isModalOpen} onClose={handleCloseMainModal}>
           <h3>{editingCategory ? `Rename List: ${editingCategory.name}` : 'Create New List'}</h3>
           <form onSubmit={handleAddOrUpdateCategory}>

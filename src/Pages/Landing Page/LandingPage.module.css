@@ -13,7 +13,7 @@
   font-family: system-ui, -apple-system, sans-serif;
   color:  #008000; 
 }
-/* Navbar Styling */
+
 .nav {
   display: flex;
   justify-content: space-between;
@@ -23,20 +23,20 @@
 
 .navButton {
   text-decoration: none;
-  color:  #008000; /* Neon green */
+  color: white;
   font-weight: 600;
   padding: 0.5rem 1.25rem;
   border-radius: 8px;
   border: 1px solid rgba(16, 185, 129, 0.2);
   transition: all 0.2s;
+  background-color: #008000;
 }
 
 .navButton:hover {
-  background-color: rgba(16, 185, 129, 0.1);
-  border-color:  #008000;
+  box-shadow: 0 15px 15px 3px  #66c966 ;
+  
 }
 
-/* Hero Section Layout */
 .heroSection {
   display: grid;
   grid-template-columns: 1fr;
@@ -67,35 +67,27 @@
   color: #ffffff;
 }
 
-@media (min-width: 768px) {
-  .title {
-    font-size: 3.75rem;
-  }
-}
-
 .highlight {
-  color:  #008000; /* Accent Green */
+  color:  #008000;
 }
 
 .description {
   font-size: 1.125rem;
   line-height: 1.7;
-  color: #9ca3af; /* Muted grey for description */
+  color: #9ca3af; 
   max-width: 500px;
 }
-
-/* Call to Action Button */
 .ctaButton {
   display: inline-block;
   align-self: flex-start;
   text-decoration: none;
   background-color:  #008000;
-  color: #0b0f19; /* Dark text on light background */
+  color: #0b0f19; 
   padding: 1rem 2.25rem;
   font-size: 1.125rem;
   font-weight: 700;
   border-radius: 50px;
-  box-shadow: 0 10px 15px -3px  #008000;
+  /* box-shadow: 0 10px 15px -3px  #008000; */
   transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
 }
 
@@ -119,4 +111,9 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   object-fit: cover;
+}
+@media (min-width: 768px) {
+  .title {
+    font-size: 3.75rem;
+  }
 }

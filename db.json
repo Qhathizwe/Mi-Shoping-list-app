@@ -150,6 +150,30 @@
         "SLbr59X9r_8"
       ],
       "id": "N5RzdgBw080"
+    },
+    {
+      "name": "Grocery",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "L0SrU0P-6-I"
+    },
+    {
+      "name": "Alcohol ",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "Q6IIrXmYsnM"
+    },
+    {
+      "name": "Tools",
+      "userId": "SLbr59X9r_8",
+      "sharedWith": [
+        "SLbr59X9r_8"
+      ],
+      "id": "ccPe1wMrXEY"
     }
   ],
   "categoryItems": [
@@ -233,6 +257,24 @@
       "categoryId": "N5RzdgBw080",
       "userId": "SLbr59X9r_8",
       "id": "9f-389U0TjY"
+    },
+    {
+      "name": "Drill",
+      "quantity": 1,
+      "notes": "build it",
+      "picture": "",
+      "categoryId": "ccPe1wMrXEY",
+      "userId": "SLbr59X9r_8",
+      "id": "30LZnuMY6uE"
+    },
+    {
+      "name": "Screwdriver",
+      "quantity": 2,
+      "notes": "build it",
+      "picture": "",
+      "categoryId": "ccPe1wMrXEY",
+      "userId": "SLbr59X9r_8",
+      "id": "H2MGMjXWvpA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
