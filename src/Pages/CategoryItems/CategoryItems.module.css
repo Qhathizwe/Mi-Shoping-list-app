@@ -1,3 +1,248 @@
-.CategoryItemsContainer{
-    border: 2px solid red;
+
+.CategoryItemsContainer {
+    background-color: black;
+    min-height: 100vh;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+
+.header {
+    box-shadow: 0px 0px 15px #008000;
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    justify-self: center;
+    background-color: #008000;
+    color: aliceblue;
+    border-radius: 10px;
+    padding: 15px 25px; 
+    box-sizing: border-box;
+    margin-bottom: 25px;
+}
+
+
+.headerLeft {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.categoryName {
+    color: aliceblue;
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+
+.back {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.back:hover {
+    box-shadow: 0px 0px 12px #ffffff;
+    transform: scale(1.1);
+}
+
+
+.addSearchSort {
+    margin: 25px auto;
+    max-width: 600px;
+    display: flex;
+    gap: 15px; 
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.Add,
+.sortBy {
+    width: 45px; 
+    height: 45px;
+    border-radius: 50px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.sortBy {
+    border-radius: 6px;
+}
+
+.Add:hover,
+.sortBy:hover {
+    box-shadow: 0px 0px 12px #06df06;
+    transform: scale(1.1);
+}
+
+
+.categoryItemName,
+.categoryItemNumber,
+.categoryItemNotes {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 2px solid #444;
+    background-color: #2a2a2a;
+    color: white;
+    font-size: 14px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 15px #008000;
+    margin-bottom: 15px;
+}
+
+.categoryItemName:focus,
+.categoryItemNumber:focus,
+.categoryItemNotes:focus {
+    outline: 1px solid #00aa00; 
+}
+
+
+.categoryItemAddImage {
+    color: white;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.categoryItemAddImage input {
+    color: #aaa;
+}
+
+
+.btns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.btnAdd {
+    background-color: #00aa00; 
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.btnAdd:hover {
+    background-color: #00cd00;
+}
+
+.btnDelete {
+    background-color: red;
+    color: white;
+    border: 1px solid #444;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+}
+
+.btnDelete:hover {
+    opacity: 0.9;
+}
+
+
+.btnEdit {
+    background-color: #3a3a3a;
+    color: white;
+    border: 1px solid #555;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.btnEdit:hover {
+    background-color: #4a4a4a;
+}
+
+
+
+.headerInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+    gap: 4px;
+}
+
+.countBadge {
+    background-color: rgba(6, 223, 6, 0.2);
+    color: #06df06;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    width: max-content;
+    border: 1px solid #008000;
+}
+
+.urlSearchBar {
+    flex: 1;
+    max-width: 380px; 
+    padding: 12px 16px;
+    border-radius: 30px;
+    border: 2px solid #333;
+    background-color: #111;
+    color: white;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.urlSearchBar:focus {
+    outline: none;
+    border-color: #06df06;
+    box-shadow: 0px 0px 10px rgba(6, 223, 6, 0.4);
+}
+
+.sortWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    min-width: 65px; 
+}
+
+.sortIndicator {
+    color: #aaa;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+
+@media (max-width: 480px) {
+    .CategoryItemsContainer {
+        padding: 20px 10px;
+    }
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .headerInfo {
+        align-items: flex-start;
+    }
+    .addSearchSort {
+        gap: 10px;
+    }
+    .urlSearchBar {
+        font-size: 0.85rem;
+        padding: 8px 12px;
+    }
 }
