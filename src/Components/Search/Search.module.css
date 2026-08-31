@@ -1,15 +1,15 @@
-
 .searchContainer {
-  background-color: black;
+  background-color: transparent; /* AMENDED: Switched to transparent to embed seamlessly */
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem 1rem;
+  padding: 0; /* AMENDED: Cleared heavy margin block cushions to align inside utility bars */
   box-sizing: border-box;
+  flex: 1; /* Allows it to expand nicely inside flex containers */
 }
 
 .searchContent {
-  background-color: black;
+  background-color: transparent;
   position: relative;
   display: flex;
   align-items: center;
@@ -19,36 +19,39 @@
 
 .searchInput {
   width: 100%;
-  height: 50px; 
+  height: 45px; /* AMENDED: Standardized height to match existing action button assets */
   border: 2px solid #008000;
   border-radius: 25px; 
-  box-shadow: 1px 1px 3px #008000;
-  font-weight: 700;
-  background-color: darkgray;
-  color: black;
+  box-shadow: 1px 1px 3px rgba(0, 128, 0, 0.3);
+  font-weight: 600;
+  background-color: #111; /* AMENDED: Shifted to deep charcoal to match application theme styling */
+  color: white; /* AMENDED: Crisp white text readability */
   padding: 0 110px 0 20px; 
   box-sizing: border-box;
   outline: none;
-  font-size: 1rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.searchInput:focus {
+  border-color: #06df06;
+  box-shadow: 0px 0px 12px #06df06;
 }
 
 .searchInput:hover {
-  box-shadow: 0px 0px 12px #06df06;
-  transform: scale(1.01);
+  box-shadow: 0px 0px 10px rgba(6, 223, 6, 0.3);
 }
 
 .searchInput::placeholder {
-  color: #333;
+  color: #666;
 }
-
 
 .btnSearch {
   position: absolute;
-  right: 5px; 
+  right: 4px; 
   background-color: #008000;
   width: 90px;
-  height: 40px; 
+  height: 37px; 
   border-radius: 20px;
   color: white;
   border: none;
@@ -61,6 +64,6 @@
 .btnSearch:hover {
   background-color: #056405; 
   color: #06df06;
-  transform: scale(1.05);
+  transform: scale(1.02);
   box-shadow: 0px 0px 10px #06df06; 
 }
