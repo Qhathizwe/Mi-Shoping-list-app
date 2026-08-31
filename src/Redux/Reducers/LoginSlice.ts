@@ -1,15 +1,16 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit";
+import { updateProfileData } from './ProfileSlice'; 
 
 export interface User {
   id: string;
   name?: string;     
   surname?: string;
   email: string;
-  password: string;
+  password: string; 
+  cellNumber?: string;
 }
 
 interface AuthState {
-  
   form: Omit<User, 'id'>;
   user: User | null;
   isLoading: boolean;
@@ -26,7 +27,7 @@ const initialState: AuthState = {
   error: null,
 };
 
-// 2. ASYNC THUNK: Handles the network fetch request securely using json-server filtering parameters
+// DIRECT FETCH PIPELINE: Queries json-server for exact matching credentials
 export const loginUserThunk = createAsyncThunk<User, AuthState['form']>(
   'auth/loginUserThunk',
   async (loginCredentials, thunkAPI) => {
@@ -39,14 +40,20 @@ export const loginUserThunk = createAsyncThunk<User, AuthState['form']>(
         throw new Error('kukhona inkinga kwi server yakho.');
       }
 
-      const matchingUsers: User[] = await response.json();
+      const users: User[] = await response.json();
 
-      if (matchingUsers.length === 0) {
-        throw new Error('akusiyona yi email noma yi password.');
+      // 1. Explicitly check if a user was found in the database array
+      const matchingUser = users.find((user) => 
+        user.email === loginCredentials.email && user.password === loginCredentials.password
+      );
+
+      // 2. If no user matches, throw an error so it goes to the catch block
+      if (!matchingUser) {
+        throw new Error('faka izimfaneko zakhona!');
       }
 
-      
-      return matchingUsers[0];
+      localStorage.setItem("User", JSON.stringify(matchingUser));
+      return matchingUser; // TypeScript is happy now because this is guaranteed to be a User object
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message || 'Kukhona Okungahambi kahle lungisa umsamu.');
     }
@@ -57,14 +64,12 @@ const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
- 
     updateLoginField: (
       state,
       action: PayloadAction<{ field: keyof AuthState['form']; value: string }>
     ) => {
       state.form[action.payload.field] = action.payload.value;
     },
-  
     resetLoginForm: (state) => {
       state.form = { email: '', password: '' };
       state.error = null;
@@ -75,7 +80,6 @@ const loginSlice = createSlice({
       state.error = null;
     }
   },
-  
   extraReducers: (builder) => {
     builder
       .addCase(loginUserThunk.pending, (state) => {
@@ -84,13 +88,25 @@ const loginSlice = createSlice({
       })
       .addCase(loginUserThunk.fulfilled, (state, action: PayloadAction<User>) => {
         state.isLoading = false;
-        state.user = action.payload; // Saves your logged-in user profile inside state.user
+        state.user = action.payload; 
         state.error = null;
-        state.form = { email: '', password: '' }; // Automatically clears credentials upon validation success
+        state.form = { email: '', password: '' }; 
       })
       .addCase(loginUserThunk.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload as string; // Maps custom reject messages to the error property
+        state.error = action.payload as string; 
+      })
+      // Syncs state instantly when changes are made inside Profile.tsx
+      .addCase(updateProfileData.fulfilled, (state, action: PayloadAction<any>) => {
+        if (state.user) {
+          state.user.name = action.payload.name;
+          state.user.surname = action.payload.surname;
+          state.user.email = action.payload.email;
+          state.user.password = action.payload.password;
+          if (action.payload.cellNumber) {
+            state.user.cellNumber = action.payload.cellNumber;
+          }
+        }
       });
   }
 });
