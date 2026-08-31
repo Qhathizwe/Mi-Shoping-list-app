@@ -1,16 +1,19 @@
 import React from 'react';
 import styles from './CategoryCard.module.css';
 import type { Category } from '../../Redux/Reducers/CategorySlice';
+import { useAppSelector } from '../../store';
 
 interface CategoryCardProps {
   category: Category;
-  // Changed onClick to pass the specific action or category ID back to the parent
   onClick: (action: 'view' | 'share' | 'edit' | 'delete', categoryId: string) => void; 
 }
 
 const CategoryCard: React.FC<CategoryCardProps> = ({ category, onClick }) => {
+  // Assessment sub-item counter logic
+  const allSavedItems = useAppSelector((state) => state.categoryItemsSlice.listItem);
+  const categorySpecificItems = allSavedItems.filter(item => item.categoryId === category.id);
+  const totalCountUnits = categorySpecificItems.reduce((acc, curr) => acc + curr.quantity, 0);
   
-  // Handles accessibility keyboard presses (Enter or Space) on the card
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -18,9 +21,8 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, onClick }) => {
     }
   };
 
-  // Handles individual button clicks cleanly
   const handleButtonClick = (e: React.MouseEvent, action: 'share' | 'edit' | 'delete') => {
-    e.stopPropagation(); // Stops the main card's onClick from triggering
+    e.stopPropagation(); // Explicit event bubble stop blocks view interception clicks
     onClick(action, category.id);
   };
 
@@ -31,16 +33,14 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, onClick }) => {
       onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}
-      style={{
-        padding: '20px',
-        border: '1px solid green',
-        borderRadius: '8px',
-        cursor: 'pointer',
-        boxShadow: '0 4px 6px #008000',
-        marginBottom: '10px' 
-      }}
     >
-      <h4>{category.name}</h4>
+      <div>
+        <h4 className={styles.cardTitle}>{category.name}</h4>
+        <div style={{ color: '#06df06', fontSize: '0.85rem', marginTop: '4px', fontWeight: 'bold' }}>
+          {totalCountUnits} Products Listed
+        </div>
+      </div>
+      
       <div className={styles.btns}>
         <button className={styles.btnShare} onClick={(e) => handleButtonClick(e, 'share')}>Share</button>
         <button className={styles.btnEdit} onClick={(e) => handleButtonClick(e, 'edit')}>Edit</button>
@@ -51,3 +51,4 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, onClick }) => {
 };
 
 export default CategoryCard;
+ 
