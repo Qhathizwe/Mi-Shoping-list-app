@@ -33,27 +33,30 @@ const Home: React.FC = () => {
   useEffect(() =>{dispatch(getCategoryThunk());
     }, []);
 
-  const navigateToCategoryItems = () => {
-      navigate ('/categoryItems');
-    }
+  const navigateToCategoryItems = (id: string, name: string) => {
+    navigate('/categoryItems', { state: { categoryId: id, categoryName: name } });
+  };
 
-  const handleAddCategory = () => {
-  
-    
-    if (!categoryName.trim()) {
-      alert('Please enter a category name');
-      return;
-    }
+  const handleAddOrUpdateCategory = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!localCategoryName.trim() || !user?.id) return;
 
-    if (!user) {
-      alert('User is not logged in');
-      return;
+    if (editingCategory) {
+      dispatch(updateCategoryThunk({ id: editingCategory.id, name: localCategoryName }))
+        .unwrap()
+        .then(() => handleCloseMainModal());
+    } else {
+      dispatch(addCategoryThunk({ name: localCategoryName, userId: user.id }))
+        .unwrap()
+        .then(() => handleCloseMainModal());
     }
+  };
 
-    dispatch(addCategoryThunk({ 
-      userId: user.id, 
-     name:categoryName
-    }))
+  const handleShareSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!shareEmail.trim() || !activeShareCategory) return;
+
+    dispatch(shareCategoryThunk({ category: activeShareCategory, targetEmail: shareEmail }))
       .unwrap()
       .then(() => {
         setCategoryName(''); 
