@@ -70,7 +70,7 @@ const Profile: React.FC = () => {
     <div className={styles.profileContainer}>
       <form className={styles.profileContent} onSubmit={handleSaveOrEditToggle}>
         
-        {/* UPDATED HEADER BAR: Back arrow on the left, profile title and avatar combined together */}
+      
         <div className={styles.profileHeaderBar}>
           <img src={back} alt="back btn" onClick={() => navigate('/home')} className={styles.backButtonIcon} />
           
@@ -79,7 +79,7 @@ const Profile: React.FC = () => {
             <h2 className={styles.profileTitle}>Profile Details</h2>
           </div>
           
-          <div className={styles.headerSpacer}></div> {/* Balances structural layout width metrics */}
+          <div className={styles.headerSpacer}></div> 
         </div>
         
         <div className={styles.profileInputs}>
