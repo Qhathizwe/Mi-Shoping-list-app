@@ -5,9 +5,17 @@ import { useAppDispatch, useAppSelector } from '../../store';
 import { updateLoginField, loginUserThunk } from '../../Redux/Reducers/LoginSlice';
 import type{ RootState }  from '../../store';
 
-const Login = () => {
+import { type Dispatch, type SetStateAction, type FormEvent } from 'react';
+
+interface LoginChildProps {
+  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
+}
+
+const Login = ({ setIsLoggedIn }: LoginChildProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  setIsLoggedIn(true); 
+
 
   const { form, isLoading, error } = useAppSelector((state) => state.auth);
 

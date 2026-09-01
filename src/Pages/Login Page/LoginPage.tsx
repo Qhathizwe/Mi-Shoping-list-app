@@ -1,10 +1,15 @@
-import LoginPage from "../../Components/Login/Login"
+import {type Dispatch, type SetStateAction } from 'react';
+import Login from '../../Components/Login/Login';
 
-export const Login = () => {
-  return (
-    <div>
-        <LoginPage />
-    </div>
-  )
+interface LoginProps {
+  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
 }
-export default Login
+
+export default function LoginPage({ setIsLoggedIn }: LoginProps) {
+  
+  return (
+      <div>
+         <Login setIsLoggedIn={setIsLoggedIn} />
+      </div>  
+  );
+}
