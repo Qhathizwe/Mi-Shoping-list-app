@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 
-import Login from './Components/Login/Login'
-import Register from './Components/Register/Register'
+import Login from './Pages/Login Page/LoginPage'
+import Register from './Pages/register page/RegisterPage'
 import Home from './Pages/Home.1/Home'
 import  Profile  from './Pages/Profile/Profile'
 import CategoryItems from './Pages/CategoryItems/CategoryItems'
