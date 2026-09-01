@@ -18,6 +18,7 @@ import {
   shareCategoryThunk,
   type Category
 } from '../../Redux/Reducers/CategorySlice'; 
+
 import CategoryCard from '../../Components/Category/CategoryCard';
 import { useNavigate, useLocation } from 'react-router-dom';
 
