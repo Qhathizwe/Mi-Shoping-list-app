@@ -47,13 +47,13 @@ export const loginUserThunk = createAsyncThunk<User, AuthState['form']>(
         user.email === loginCredentials.email && user.password === loginCredentials.password
       );
 
-      // 2. If no user matches, throw an error so it goes to the catch block
+      
       if (!matchingUser) {
         throw new Error('faka izimfaneko zakhona!');
       }
 
       localStorage.setItem("User", JSON.stringify(matchingUser));
-      return matchingUser; // TypeScript is happy now because this is guaranteed to be a User object
+      return matchingUser; 
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message || 'Kukhona Okungahambi kahle lungisa umsamu.');
     }

@@ -60,7 +60,7 @@ export const getCategoryThunk = createAsyncThunk(
       if (!response.ok) throw new Error('Failed to fetch categories');
       const allCategories: Category[] = await response.json();
       
-      // Filter clientside because json-server doesn't support deep array query filtering natively
+      localStorage.setItem("Categories", JSON.stringify(allCategories));
       return allCategories.filter(cat => cat.sharedWith.includes(userId));
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);

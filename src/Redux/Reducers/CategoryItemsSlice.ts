@@ -18,7 +18,7 @@ interface ListItemsState {
     notes: string;
     picture: string; 
   };
-  editingItem: ListItem | null; // Tracks which item is currently being edited
+  editingItem: ListItem | null; 
   isSuccess: boolean;
   isLoading: boolean;
   error: string | null;
